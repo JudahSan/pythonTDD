@@ -1,14 +1,52 @@
 class Checkout:
-  
+  class Discount:
+    def __init__(self, noOfItems, price):
+      self.noOfItems = noOfItems
+      self.price = price
+
+
   def __init__(self):
     self.prices = {}
-    self.total = 0
+    self.discounts = {}
+    self.items = {}
+    
+
+  def addDiscount(self, item, noOfItems, price):
+    discount = self.Discount(noOfItems, price)
+    self.discounts[item] = discount
 
   def addItemPrice(self,item, price):
     self.prices[item] = price
 
   def addItem(self, item):
-    self.total += self.prices[item]
+    if item in self.items:
+      self.items[item] += 1
+    else:
+      self.items[item] = 1
 
   def calcTotal(self):
-    return self.total
+    total = 0
+    for item, cnt in self.items.items():
+      total += self.calcItemTotal(item,cnt)
+    return total
+  
+  def calcItemTotal(self, item, cnt):
+    total = 0
+    if item in self.discounts:
+        discount = self.discounts[item]
+        if cnt >= discount.noOfItems:
+          total += self.calcItemDiscountedTotal(item, cnt, discount)
+        else:
+          total += self.prices[item] * cnt
+    else:
+      total += self.prices[item] * cnt 
+    
+    return total
+
+  def calcItemDiscountedTotal(self, item, cnt, discount):
+    total = 0
+    noOfDiscounts = cnt/discount.noOfItems
+    total += noOfDiscounts * discount.price
+    remaining = cnt % discount.noOfItems
+    total += remaining * self.prices[item]
+    return total
