@@ -93,9 +93,50 @@ Use a Static Code Analysis Too
 - Pylint is an excellent open source static analysis tool for python that can be used for detecting bugs in your code.
 - It can also verify the code is formatted to the team’s standards
 - And it can even generate UML diagrams based on it’s analysis
-- In the last lecture I’ll review what was gone over in the course and where do go from here.
 
+Test Behavior Rather Than Implementation
+-
+
+- When writing your tests try to test the behaviour rather than the implementation.
+- When your test is written to verify the behaviour rather than the implementation then the implementation can change without affecting your test.
+- This is not always possible as some implementations use collaborators that need to be mocked out.
+- In addition, some testing is specifically done to verify that the implementaion is calling and handing responses from collaborators correctly (i.e. database and network calls)
+
+
+Testing Implementation Example
+-
+
+1. Testing implementation
+
+```py
+def addDays(theDate, days):
+  return theDate.timedelta(days=days)
+```
+
+```py
+def test_addDaysImplementation(monkeypatch):
+  mock_delta = MagicMock(
+    return_value=datetime.timedelta(days=1)
+  monkeypatch(datetime.timedelta, mock_delta)
+  addDays(datetime.datetime(2020, 1, 1), 1)
+  mock_delta.assert_called_once_with(days=1)
+  )
+```
+
+2. Testing the behavior
+
+```py
+def addDays(theDate, days):
+  return theDate.timedelta(days=days)
+```
+
+```py
+def test_addDaysImplementation(monkeypatch):
+  result=addDays(datetime.datetime(2020, 1, 1), 1)
+  assert result == datetime.datetime(2020, 1, 2)
+```
 
 > [Clean Code: A Handbook of Agile Software Craftmanship](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
 > Test Driven Development: By Example - Kent Beck
 > Working Effectively with Legacy Code - Michael Feathers
+
