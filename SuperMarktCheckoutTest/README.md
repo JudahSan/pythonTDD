@@ -11,11 +11,11 @@ Project Overview
 Test Cases
 -
 
--[x] Can create an instance of the Checkout class
--[x] Can add an item price
--[x] Can add an item
--[x] Can calculate the current total
--[x] Can add multiple items and get correct total
--[x] Can add discount rules
--[x] Can apply discount rules to the total
-- Exception is Thrown for item added without a price
+- [x] Can create an instance of the Checkout class
+- [x] Can add an item price
+- [x] Can add an item
+- [x] Can calculate the current total
+- [x] Can add multiple items and get correct total
+- [x] Can add discount rules
+- [x] Can apply discount rules to the total
+- [x] Exception is Thrown for item added without a price
