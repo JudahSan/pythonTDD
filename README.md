@@ -136,7 +136,7 @@ def test_addDaysImplementation(monkeypatch):
   assert result == datetime.datetime(2020, 1, 2)
 ```
 
-> [Clean Code: A Handbook of Agile Software Craftmanship](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
-> Test Driven Development: By Example - Kent Beck
-> Working Effectively with Legacy Code - Michael Feathers
+> [Clean Code: A Handbook of Agile Software Craftmanship](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) <br>
+> Test Driven Development: By Example - Kent Beck <br>
+> Working Effectively with Legacy Code - Michael Feathers <br>
 
